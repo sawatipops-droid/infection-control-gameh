@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>เกมฝึกทักษะการพยาบาล | Hansa Studio</title>
+<style>
+:root{--bg:#f3f7fb;--card:#fff;--ink:#172b4d;--muted:#61718a;--primary:#2367d1;--primary2:#174ca4;--good:#168653;--bad:#c0392b;--line:#dce5f0}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(135deg,#eaf3ff,#f8f5ff);font-family:Tahoma,"Noto Sans Thai",sans-serif;color:var(--ink);line-height:1.65}
+.wrap{max-width:900px;margin:auto;padding:22px 15px 40px}.brand{text-align:center;font-size:13px;color:var(--muted);letter-spacing:.3px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:clamp(20px,4vw,36px);box-shadow:0 12px 35px #1b3c6510;margin:18px 0}
+h1,h2,h3{line-height:1.3;margin-top:0}h1{font-size:clamp(26px,5vw,40px)}h2{font-size:clamp(22px,4vw,30px)}.center{text-align:center}.sub{color:var(--muted)}.emoji{font-size:48px}.btn{border:0;border-radius:12px;padding:12px 20px;font-size:16px;font-weight:700;cursor:pointer;background:var(--primary);color:white;margin:5px;transition:.15s}.btn:hover{background:var(--primary2)}.btn.secondary{background:#e9f0fa;color:var(--ink)}.btn.outline{background:white;color:var(--primary);border:1px solid var(--primary)}.btn:disabled{opacity:.5;cursor:not-allowed}
+.row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}.choice{display:block;width:100%;text-align:left;padding:14px 16px;margin:9px 0;border:1px solid var(--line);border-radius:12px;background:white;color:var(--ink);font-size:16px;cursor:pointer}.choice:hover{border-color:var(--primary);background:#f6f9ff}.choice.selected{border:2px solid var(--primary);background:#edf4ff}.choice.correct{border:2px solid var(--good);background:#e9f8f0}.choice.wrong{border:2px solid var(--bad);background:#fff0ef}.badge{display:inline-block;padding:4px 10px;border-radius:30px;background:#edf4ff;color:var(--primary);font-size:13px;font-weight:bold;margin:3px}.progress{height:8px;background:#e5ebf3;border-radius:10px;overflow:hidden;margin:12px 0 20px}.progress div{height:100%;background:var(--primary);width:0;transition:width .2s}.hidden{display:none!important}.feedback{padding:12px 14px;border-radius:12px;margin:14px 0;background:#f3f7fb}.feedback.good{background:#e9f8f0;color:#11683f}.feedback.bad{background:#fff0ef;color:#9e2d24}textarea{width:100%;min-height:125px;border:1px solid #cbd7e6;border-radius:12px;padding:13px;font:inherit;resize:vertical}input[type=number]{font:inherit;padding:9px;border:1px solid var(--line);border-radius:10px;width:90px}.topic{border:1px solid var(--line);border-radius:15px;padding:18px;text-align:left;background:white;cursor:pointer;width:100%;color:var(--ink)}.topic:hover{border-color:var(--primary);background:#f8fbff}.topic strong{display:block;font-size:18px}.topic span{color:var(--muted);font-size:14px}.small{font-size:13px;color:var(--muted)}.divider{border:0;border-top:1px solid var(--line);margin:22px 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="brand">HANSA STUDIO • เกมฝึกทักษะการพยาบาล</div>
+
+  <section id="start" class="panel center">
+    <div class="emoji">🩺</div>
+    <h1>ภารกิจนักศึกษาพยาบาล</h1>
+    <p class="sub">เกมฝึกประเมินสถานการณ์ผู้ป่วย 4 บท พร้อมคำถามเลือกตอบและข้อเขียน</p>
+    <p>อ่านสถานการณ์ คิดอย่างเป็นระบบ แล้วเลือกการดูแลที่เหมาะสม</p>
+    <button class="btn" onclick="showScreen('notice')">เริ่มเกม</button>
+    <p class="small">จัดทำโดย Hansa Studio</p>
+  </section>
+
+  <section id="notice" class="panel hidden">
+    <h2>📌 คำชี้แจง</h2>
+    <ul>
+      <li>เกมนี้ใช้เพื่อฝึกทบทวนความรู้เบื้องต้นด้านการพยาบาล ไม่ใช้แทนแนวทางหรือคำสั่งของทีมรักษา</li>
+      <li>มี 4 บท ได้แก่ การประเมินและดูแลผู้ป่วยที่มีอาการปวด, การป้องกันการพลัดตกหกล้ม, การป้องกันและควบคุมการติดเชื้อ และการประเมินการหายใจ/สัญญาณชีพ</li>
+      <li>ในแต่ละรอบจะสุ่มสถานการณ์จากบทที่เลือก และมีทั้งคำถามแบบเลือกตอบกับข้อเขียน</li>
+      <li>อ่านโจทย์ให้ครบก่อนตอบ สามารถดูเฉลยหลังยืนยันคำตอบได้</li>
+    </ul>
+    <div class="row"><button class="btn secondary" onclick="showScreen('start')">ย้อนกลับ</button><button class="btn" onclick="showScreen('howto')">ไปต่อ</button></div>
+  </section>
+
+  <section id="howto" class="panel hidden">
+    <h2>🎮 วิธีเล่นเกม</h2>
+    <ol>
+      <li>เลือกบทที่ต้องการเล่น หรือเลือก “สุ่ม 4 บท” เพื่อให้ระบบสุ่มบทและสถานการณ์</li>
+      <li>ตอบคำถามเลือกตอบทีละข้อ แล้วกด “ตรวจคำตอบ” เพื่อดูเฉลยและเหตุผล</li>
+      <li>ตอบข้อเขียนโดยพิมพ์แนวทางประเมินหรือการดูแลผู้ป่วย แล้วกดส่งคำตอบ</li>
+      <li>เมื่อจบเกม ระบบจะแสดงคะแนนข้อเลือกตอบและสรุปคำตอบข้อเขียน</li>
+    </ol>
+    <div class="row"><button class="btn secondary" onclick="showScreen('notice')">ย้อนกลับ</button><button class="btn" onclick="showScreen('categories')">ไปต่อ</button></div>
+  </section>
+
+  <section id="categories" class="panel hidden">
+    <h2>📚 เลือกหมวดเกม</h2>
+    <p class="sub">เลือกบทใดบทหนึ่ง หรือเล่นแบบสุ่มข้ามทั้ง 4 บท</p>
+    <div class="row" style="flex-direction:column">
+      <button class="topic" onclick="startGame('all')"><strong>🎲 สุ่ม 4 บท</strong><span>สุ่มสถานการณ์จากทุกบทและสลับลำดับข้อ</span></button>
+      <button class="topic" onclick="startGame('pain')"><strong>🩹 บทที่ 1: การประเมินและดูแลผู้ป่วยที่มีอาการปวด</strong><span>ประเมินระดับปวด ตำแหน่ง ลักษณะ และการดูแล</span></button>
+      <button class="topic" onclick="startGame('fall')"><strong>🚶 บทที่ 2: การป้องกันการพลัดตกหกล้ม</strong><span>ปัจจัยเสี่ยง ผู้ป่วย และความปลอดภัยของสิ่งแวดล้อม</span></button>
+      <button class="topic" onclick="startGame('infection')"><strong>🦠 บทที่ 3: การป้องกันและควบคุมการติดเชื้อ</strong><span>การทำความสะอาดมือ PPE และการป้องกันการแพร่เชื้อ</span></button>
+      <button class="topic" onclick="startGame('vitals')"><strong>🫁 บทที่ 4: การประเมินการหายใจและสัญญาณชีพ</strong><span>การหายใจ SpO₂ และสัญญาณชีพผิดปกติ</span></button>
+    </div>
+  </section>
+
+  <section id="game" class="panel hidden">
+    <div class="row" style="justify-content:space-between;align-items:center">
+      <span id="chapterBadge" class="badge"></span><span id="counter" class="badge"></span>
+    </div>
+    <div class="progress"><div id="bar"></div></div>
+    <h2 id="caseTitle"></h2>
+    <p id="scenario"></p>
+    <hr class="divider">
+    <h3 id="question"></h3>
+    <div id="answers"></div>
+    <div id="feedback" class="feedback hidden" aria-live="polite"></div>
+    <div class="row" id="actionRow"><button id="checkBtn" class="btn" onclick="checkAnswer()">ตรวจคำตอบ</button></div>
+    <div id="writtenArea" class="hidden">
+      <h3>✍️ ข้อเขียน: อธิบายว่าควรประเมินหรือดำเนินการอย่างไรต่อ พร้อมเหตุผล</h3>
+      <textarea id="writtenAnswer" placeholder="พิมพ์คำตอบของคุณที่นี่..."></textarea>
+      <div class="row"><button class="btn" onclick="submitWritten()">ส่งคำตอบ</button></div>
+      <p id="writtenFeedback" class="feedback hidden"></p>
+    </div>
+    <div class="row"><button id="nextBtn" class="btn hidden" onclick="nextQuestion()">ข้อต่อไป →</button><button class="btn secondary" onclick="confirmExit()">กลับหน้าเลือกบท</button></div>
+  </section>
+
+  <section id="results" class="panel hidden center">
+    <div class="emoji">🏆</div><h2>จบภารกิจแล้ว!</h2>
+    <p id="scoreLine"></p>
+    <p id="writtenSummary" class="sub"></p>
+    <div class="row"><button class="btn" onclick="startGame(lastMode)">เล่นอีกครั้ง</button><button class="btn secondary" onclick="showScreen('categories')">เลือกบทอื่น</button></div>
+    <hr class="divider"><p><strong>จัดทำโดย Hansa Studio</strong></p>
+  </section>
+  <footer class="brand">© Hansa Studio • สื่อการเรียนรู้เพื่อฝึกทบทวน</footer>
+</div>
+<script>
+const bank = [
+{chapter:'pain',name:'บทที่ 1 • การประเมินและดูแลผู้ป่วยที่มีอาการปวด',title:'Case 01: ผู้ป่วยปวดแผลผ่าตัด',scenario:'ผู้ป่วยชายอายุ 45 ปี หลังผ่าตัดไส้ติ่ง 4 ชั่วโมง บอกว่า “ปวดแผลมาก” และมีสีหน้าแสดงความเจ็บปวด',q:'ข้อมูลใดควรประเมินเพิ่มเติมเป็นอันดับแรก?',opts:['ความอยากอาหาร','ระดับความปวด','จำนวนชั่วโมงที่นอน','งานอดิเรก'],a:1,why:'ควรประเมินระดับความปวดโดยให้ผู้ป่วยรายงานคะแนน และซักถามตำแหน่ง ลักษณะ ระยะเวลา รวมถึงปัจจัยที่ทำให้ปวดมากขึ้นหรือลดลง',written:'ควรประเมินระดับและลักษณะความปวด ตำแหน่งแผล สัญญาณชีพ และอาการผิดปกติ จากนั้นให้การดูแลลดปวดตามแผนและประเมินซ้ำ'},
+{chapter:'pain',name:'บทที่ 1 • การประเมินและดูแลผู้ป่วยที่มีอาการปวด',title:'Case 02: ผู้ป่วยปวดท้อง',scenario:'ผู้ป่วยหญิงอายุ 30 ปี ปวดท้องบริเวณท้องน้อย ระบุว่าปวดระดับ 7/10',q:'ข้อมูลใดควรประเมินเพิ่มเติม?',opts:['ตำแหน่ง ลักษณะ และระยะเวลาของอาการปวด','สีเสื้อผ้า','งานอดิเรก','อาหารที่ชอบ'],a:0,why:'ต้องซักประวัติอาการปวดอย่างเป็นระบบ รวมทั้งอาการร่วม เช่น คลื่นไส้ อาเจียน และสังเกตอาการรุนแรงหรือเปลี่ยนแปลง',written:'ประเมินตำแหน่ง ลักษณะ ระดับและระยะเวลาปวด อาการร่วม และสัญญาณชีพ หากปวดรุนแรงหรือเพิ่มขึ้นให้รายงานทีมสุขภาพ'},
+{chapter:'pain',name:'บทที่ 1 • การประเมินและดูแลผู้ป่วยที่มีอาการปวด',title:'Case 03: ผู้ป่วยปวดศีรษะ',scenario:'ผู้ป่วยชายอายุ 25 ปี บอกว่าปวดศีรษะตั้งแต่เช้า ระดับความปวด 5/10',q:'ควรถามข้อมูลใดเพิ่มเติม?',opts:['อาการร่วม เช่น คลื่นไส้ อาเจียน ตามัว','สีรองเท้า','รายการโทรทัศน์ที่ชอบ','จำนวนเพื่อน'],a:0,why:'อาการร่วมช่วยคัดกรองสาเหตุและความรุนแรง โดยเฉพาะอาการทางระบบประสาทหรืออาการที่เกิดขึ้นอย่างฉับพลัน',written:'ประเมินตำแหน่ง ลักษณะ ระดับ ระยะเวลาปวด อาการร่วมและสัญญาณอันตราย หากปวดรุนแรงเฉียบพลันหรือมีอาการทางระบบประสาทให้รีบแจ้งทีมรักษา'},
+{chapter:'pain',name:'บทที่ 1 • การประเมินและดูแลผู้ป่วยที่มีอาการปวด',title:'Case 04: ผู้ป่วยปวดหลัง',scenario:'ผู้ป่วยหญิงอายุ 50 ปี ปวดหลังหลังยกของหนัก ระดับความปวด 6/10',q:'ควรประเมินข้อมูลใดก่อน?',opts:['กลไกหรือสาเหตุที่ทำให้เกิดอาการปวด','น้ำหนักเสื้อผ้า','อาหารมื้อเช้า','รายการโทรทัศน์'],a:0,why:'การทราบเหตุการณ์ก่อนเริ่มปวดช่วยประเมินลักษณะการบาดเจ็บ และควรถามอาการปวดร้าว ชา หรืออ่อนแรงร่วมด้วย',written:'ให้พักและหลีกเลี่ยงท่าที่กระตุ้นปวด ประเมินตำแหน่ง ลักษณะ อาการปวดร้าว การเคลื่อนไหว และอาการชา/อ่อนแรง หากมีสัญญาณอันตรายให้รายงาน'},
+{chapter:'pain',name:'บทที่ 1 • การประเมินและดูแลผู้ป่วยที่มีอาการปวด',title:'Case 05: ผู้ป่วยปวดจากแผล',scenario:'ผู้ป่วยบอกว่าปวดแผลมากเมื่อขยับตัว และให้คะแนนความปวด 8/10',q:'ควรประเมินความปวดด้วยวิธีใด?',opts:['ให้ผู้ป่วยประเมินคะแนนความปวดด้วยตนเอง','ดูจากสีหน้าอย่างเดียว','ดูจากอายุ','ดูจากน้ำหนัก'],a:0,why:'หากผู้ป่วยสื่อสารได้ การรายงานคะแนนปวดด้วยตนเองเป็นข้อมูลสำคัญ ควรประเมินแผลและผลกระทบต่อการเคลื่อนไหวร่วมด้วย',written:'ประเมินคะแนนปวด ตำแหน่งและลักษณะแผล ปัจจัยกระตุ้นและผลต่อการเคลื่อนไหว ให้การดูแลตามแผนและประเมินซ้ำ'},
+{chapter:'fall',name:'บทที่ 2 • การป้องกันการพลัดตกหกล้ม',title:'Case 01: ผู้สูงอายุหลังผ่าตัด',scenario:'ผู้ป่วยชายอายุ 72 ปี หลังผ่าตัดช่องท้อง 1 วัน ต้องการลุกไปเข้าห้องน้ำเอง แต่มีอาการอ่อนเพลียและเดินไม่มั่นคง',q:'ปัจจัยเสี่ยงต่อการพลัดตกหกล้มข้อใดสำคัญที่สุด?',opts:['อายุและอ่อนเพลีย','รับประทานอาหารได้น้อย','นอนพักบนเตียง','มีแผลผ่าตัด'],a:0,why:'อายุสูง อ่อนเพลีย และเดินไม่มั่นคงเพิ่มความเสี่ยงหกล้ม ควรประเมินการทรงตัว อาการเวียนศีรษะและสัญญาณชีพก่อนลุก',written:'ไม่ควรให้ลุกเอง ควรช่วยพยุงหรือใช้อุปกรณ์ช่วยเดิน ประเมินอาการและจัดสิ่งแวดล้อมให้ปลอดภัยเพื่อลดความเสี่ยงหกล้ม'},
+{chapter:'fall',name:'บทที่ 2 • การป้องกันการพลัดตกหกล้ม',title:'Case 02: ผู้ป่วยมีอาการเวียนศีรษะ',scenario:'ผู้ป่วยหญิงอายุ 65 ปี เวียนศีรษะเมื่อลุกจากเตียง และพยายามลุกขึ้นอย่างรวดเร็วโดยไม่เรียกเจ้าหน้าที่',q:'การปฏิบัติใดเหมาะสมที่สุด?',opts:['ให้ลุกเองเพื่อฝึกการทรงตัว','ให้นอนต่อโดยไม่ต้องประเมิน','ให้เปลี่ยนท่าช้า ๆ และเรียกเจ้าหน้าที่ก่อนลุก','ให้เดินทันที'],a:2,why:'การเปลี่ยนท่าช้า ๆ และมีผู้ช่วยดูแลช่วยลดความเสี่ยงหน้ามืดและหกล้ม ควรประเมินความดันและยาที่ได้รับด้วย',written:'ให้ผู้ป่วยนั่งพักก่อนค่อย ๆ ลุกโดยมีเจ้าหน้าที่ช่วย ประเมินอาการเวียนศีรษะและความดันตามแนวทาง ไม่ปล่อยให้เดินลำพัง'},
+{chapter:'fall',name:'บทที่ 2 • การป้องกันการพลัดตกหกล้ม',title:'Case 03: พื้นห้องเปียก',scenario:'บริเวณหน้าห้องน้ำมีน้ำหกบนพื้น และมีผู้ป่วยกำลังเดินผ่านบริเวณดังกล่าว',q:'ควรดำเนินการใดเป็นอันดับแรก?',opts:['เดินผ่านไปก่อน','แจ้งให้เดินระวังอย่างเดียว','กั้นพื้นที่และจัดการทำความสะอาดทันที','รอแม่บ้านโดยไม่เตือนใคร'],a:2,why:'ต้องป้องกันไม่ให้ผู้ป่วยเดินผ่านจุดเสี่ยงก่อน แล้วจึงทำความสะอาดหรือประสานผู้รับผิดชอบ',written:'กั้นพื้นที่หรือพาผู้ป่วยออกจากจุดเสี่ยง แจ้งเตือนและทำความสะอาดพื้น ตรวจสิ่งกีดขวางและแสงสว่าง'},
+{chapter:'fall',name:'บทที่ 2 • การป้องกันการพลัดตกหกล้ม',title:'Case 04: ผู้ป่วยรับยาที่ทำให้ง่วง',scenario:'ผู้ป่วยได้รับยาที่ทำให้ง่วงซึม แล้วต้องการเข้าห้องน้ำด้วยตนเอง',q:'สิ่งใดเป็นปัจจัยเสี่ยงสำคัญ?',opts:['ได้รับยาที่ทำให้ง่วง','รับประทานอาหาร','มีญาติเฝ้า','อยู่ในห้องพัก'],a:0,why:'อาการง่วงซึมอาจลดความตื่นตัวและการทรงตัว จึงควรประเมินระดับความรู้สึกตัวและช่วยเหลือการเดิน',written:'ประเมินความง่วงและการทรงตัว ช่วยพาไปห้องน้ำตามความเหมาะสม ไม่ปล่อยให้เดินเอง และจัดสิ่งแวดล้อมให้ปลอดภัย'},
+{chapter:'fall',name:'บทที่ 2 • การป้องกันการพลัดตกหกล้ม',title:'Case 05: ห้องมืดในเวลากลางคืน',scenario:'ผู้ป่วยสูงอายุต้องการเข้าห้องน้ำเวลา 02.00 น. แสงสว่างน้อยและมองเห็นไม่ชัด',q:'ปัจจัยใดเพิ่มความเสี่ยงหกล้มมากที่สุด?',opts:['เวลากลางคืนและแสงสว่างไม่เพียงพอ','ผู้ป่วยนอนหลับ','ห้องมีเตียง','ผู้ป่วยมีญาติ'],a:0,why:'แสงน้อยและการมองเห็นไม่ชัดทำให้มองไม่เห็นสิ่งกีดขวาง ควรเปิดไฟและช่วยเหลือผู้ป่วย',written:'เปิดไฟให้เพียงพอ ตรวจเส้นทางให้ปลอดสิ่งกีดขวาง และช่วยพาผู้ป่วยไปห้องน้ำตามระดับความเสี่ยง'},
+{chapter:'infection',name:'บทที่ 3 • การป้องกันและควบคุมการติดเชื้อ',title:'Case 01: การล้างมือก่อนให้การพยาบาล',scenario:'พยาบาลกำลังจะทำแผลให้ผู้ป่วย แต่พบว่ายังไม่ได้ทำความสะอาดมือ',q:'ควรทำสิ่งใดก่อนเริ่มทำแผล?',opts:['ใส่ถุงมือทันที','ล้างมือหรือทำความสะอาดมือให้ถูกต้อง','เปิดอุปกรณ์ทำแผลก่อน','เช็ดมือด้วยผ้าแห้ง'],a:1,why:'การทำความสะอาดมือก่อนหัตถการช่วยลดการแพร่กระจายเชื้อ ถุงมือไม่สามารถทดแทนการทำความสะอาดมือได้',written:'ทำความสะอาดมือก่อนเริ่มทำแผล เลือกวิธีตามแนวทางของสถานพยาบาล และเตรียมอุปกรณ์สะอาดอย่างเหมาะสม'},
+{chapter:'infection',name:'บทที่ 3 • การป้องกันและควบคุมการติดเชื้อ',title:'Case 02: การใช้ถุงมือ',scenario:'พยาบาลต้องดูดเสมหะให้ผู้ป่วยและคาดว่าจะสัมผัสสารคัดหลั่งจากทางเดินหายใจ',q:'ควรใช้อุปกรณ์ใดเพื่อป้องกันการสัมผัสสารคัดหลั่ง?',opts:['ถุงมือและ PPE ที่เหมาะกับความเสี่ยง','หมวกอย่างเดียว','รองเท้าอย่างเดียว','ไม่ต้องใช้อุปกรณ์ป้องกัน'],a:0,why:'ต้องเลือกอุปกรณ์ป้องกันส่วนบุคคลตามความเสี่ยงของหัตถการ และทำความสะอาดมือก่อนและหลังใช้ถุงมือ',written:'ประเมินความเสี่ยง สวมถุงมือและ PPE ที่เหมาะสม เตรียมอุปกรณ์ให้พร้อม และทำความสะอาดมือก่อนและหลังหัตถการ'},
+{chapter:'infection',name:'บทที่ 3 • การป้องกันและควบคุมการติดเชื้อ',title:'Case 03: การถอดถุงมือ',scenario:'หลังทำแผล พยาบาลถอดถุงมือแล้วจับโทรศัพท์ทันทีโดยยังไม่ได้ทำความสะอาดมือ',q:'การกระทำใดไม่ถูกต้อง?',opts:['ถอดถุงมือ','จับโทรศัพท์ทันทีหลังถอดถุงมือ','ทำแผลให้ผู้ป่วย','ทิ้งถุงมือ'],a:1,why:'มืออาจปนเปื้อนระหว่างใช้หรือถอดถุงมือ จึงต้องทำความสะอาดมือก่อนสัมผัสสิ่งของอื่น',written:'ทิ้งถุงมืออย่างถูกวิธีและทำความสะอาดมือทันที ก่อนสัมผัสโทรศัพท์หรืออุปกรณ์อื่น ทำความสะอาดสิ่งของหากปนเปื้อน'},
+{chapter:'infection',name:'บทที่ 3 • การป้องกันและควบคุมการติดเชื้อ',title:'Case 04: การไอและจาม',scenario:'ผู้ป่วยไอและจามบ่อยโดยไม่ปิดปากหรือจมูก ทำให้ละอองกระจายออกมา',q:'ควรแนะนำผู้ป่วยอย่างไร?',opts:['ไอหรือจามโดยไม่ต้องปิด','ปิดปากและจมูกด้วยทิชชูหรือข้อพับแขน','หันหน้าเข้าหาผู้อื่น','ใช้มือปิดแล้วจับสิ่งของต่อ'],a:1,why:'มารยาทการไอจามช่วยลดการแพร่กระจายละออง ควรทิ้งทิชชูและทำความสะอาดมือหลังสัมผัสสารคัดหลั่ง',written:'แนะนำให้ใช้ทิชชูหรือข้อพับแขนปิดปากจมูก สวมหน้ากากตามความเหมาะสม และทำความสะอาดมือหลังไอจามหรือสัมผัสสารคัดหลั่ง'},
+{chapter:'infection',name:'บทที่ 3 • การป้องกันและควบคุมการติดเชื้อ',title:'Case 05: ผู้ป่วยสงสัยโรคติดต่อทางเดินหายใจ',scenario:'ผู้ป่วยมีไข้ ไอ และน้ำมูก นั่งรอร่วมกับผู้ป่วยรายอื่นในโรงพยาบาล',q:'การดำเนินการใดเหมาะสมที่สุด?',opts:['ให้นั่งรวมกับทุกคน','ให้สวมหน้ากากและแยกจากผู้อื่นตามความเหมาะสม','ไม่ต้องทำอะไร','ให้เดินไปรอบ ๆ ห้อง'],a:1,why:'การสวมหน้ากาก การแยกหรือเว้นระยะ และการประเมินตามแนวทางสถานพยาบาลช่วยลดการแพร่เชื้อ',written:'จัดให้สวมหน้ากาก แยกหรือเว้นระยะจากผู้อื่น ประเมินอาการและประวัติสัมผัสโรค แล้วปฏิบัติตามแนวทางควบคุมการติดเชื้อ'},
+{chapter:'infection',name:'บทที่ 3 • การป้องกันและควบคุมการติดเชื้อ',title:'Case 06: การเตรียมอุปกรณ์ทำแผล',scenario:'นักศึกษาพยาบาลเตรียมทำแผลและพบว่าอุปกรณ์บางส่วนวางปะปนกับอุปกรณ์ที่ใช้แล้ว',q:'ควรทำอย่างไร?',opts:['ใช้อุปกรณ์ทั้งหมดต่อ','แยกอุปกรณ์สะอาดออกจากของใช้แล้วและทิ้ง/จัดการของปนเปื้อนตามแนวทาง','ใช้ของที่อยู่ใกล้ที่สุด','เช็ดด้วยผ้าแล้วใช้ต่อ'],a:1,why:'อุปกรณ์ที่อาจปนเปื้อนต้องไม่ถูกนำมาใช้กับแผล ควรแยกพื้นที่สะอาดและพื้นที่ปนเปื้อน',written:'หยุดใช้และแยกอุปกรณ์ที่ปนเปื้อน ตรวจสอบความสะอาดและวันหมดอายุ แล้วใช้เฉพาะอุปกรณ์ที่ปลอดภัยตามแนวทาง'},
+{chapter:'vitals',name:'บทที่ 4 • การประเมินการหายใจและสัญญาณชีพ',title:'Case 01: ผู้ป่วยหายใจเร็ว',scenario:'ผู้ป่วยชายอายุ 60 ปี รู้สึกหายใจไม่อิ่ม หายใจเร็วและพูดเป็นประโยคยาวได้ลำบาก',q:'อาการใดเป็นสัญญาณสำคัญของปัญหาการหายใจ?',opts:['หายใจเร็วและพูดไม่เป็นประโยค','รับประทานอาหารได้','นอนหลับได้','ปัสสาวะปกติ'],a:0,why:'หายใจเร็วร่วมกับพูดลำบากอาจบ่งบอกภาวะหายใจลำบาก ต้องประเมินอย่างเร่งด่วน',written:'จัดท่าให้หายใจสะดวก ประเมินอัตราและลักษณะการหายใจ SpO₂ สีผิวและระดับความรู้สึกตัว แล้วรีบรายงานผู้รับผิดชอบ'},
+{chapter:'vitals',name:'บทที่ 4 • การประเมินการหายใจและสัญญาณชีพ',title:'Case 02: ค่าออกซิเจนต่ำ',scenario:'ผู้ป่วยโรคปอดเหนื่อย มีค่า SpO₂ 88% และริมฝีปากคล้ำเล็กน้อย',q:'ข้อมูลใดผิดปกติและควรให้ความสำคัญ?',opts:['SpO₂ 88%','ผู้ป่วยรู้สึกตัวดี','ผู้ป่วยพูดได้','ผู้ป่วยนั่งบนเตียง'],a:0,why:'ค่าออกซิเจนต่ำร่วมกับริมฝีปากคล้ำเป็นสัญญาณอันตราย ต้องประเมินและแจ้งทีมรักษาโดยเร็ว',written:'จัดท่าให้หายใจสะดวก ประเมินการหายใจและระดับความรู้สึกตัว ให้การช่วยเหลือด้านออกซิเจนตามแนวทาง/แผนการรักษาและรีบแจ้งทีมรักษา'},
+{chapter:'vitals',name:'บทที่ 4 • การประเมินการหายใจและสัญญาณชีพ',title:'Case 03: หายใจมีเสียงหวีด',scenario:'ผู้ป่วยหายใจเหนื่อยและได้ยินเสียงหวีดขณะหายใจออก',q:'เสียงดังกล่าวอาจสัมพันธ์กับปัญหาใด?',opts:['ทางเดินหายใจตีบแคบ','ปวดท้อง','ความดันโลหิตสูง','ภาวะขาดน้ำ'],a:0,why:'เสียงหวีดอาจสัมพันธ์กับทางเดินหายใจตีบแคบ ควรประเมินความรุนแรงและค่าออกซิเจน',written:'จัดท่าให้หายใจสะดวก ประเมินอัตราการหายใจ เสียงหายใจ SpO₂ และระดับความรู้สึกตัว พร้อมรายงานหากมีอาการรุนแรงหรือแย่ลง'},
+{chapter:'vitals',name:'บทที่ 4 • การประเมินการหายใจและสัญญาณชีพ',title:'Case 04: ผู้ป่วยมีไข้สูง',scenario:'ผู้ป่วยมีอุณหภูมิ 39.2°C หนาวสั่นและอ่อนเพลีย',q:'ข้อมูลใดแสดงถึงความผิดปกติของสัญญาณชีพ?',opts:['อุณหภูมิ 39.2°C','ผู้ป่วยรู้สึกตัวดี','ผู้ป่วยรับประทานอาหารได้','ผู้ป่วยนอนบนเตียง'],a:0,why:'อุณหภูมิ 39.2°C เป็นไข้สูง ควรประเมินสัญญาณชีพอื่นและอาการร่วม',written:'วัดสัญญาณชีพซ้ำ ประเมินอาการร่วมและสาเหตุที่เป็นไปได้ ติดตามอย่างใกล้ชิดและรายงานตามความรุนแรง'},
+{chapter:'vitals',name:'บทที่ 4 • การประเมินการหายใจและสัญญาณชีพ',title:'Case 05: ความดันโลหิตต่ำ',scenario:'ผู้ป่วยหลังผ่าตัดหน้ามืด อ่อนแรง และมีความดันโลหิต 85/55 mmHg',q:'ข้อมูลใดผิดปกติชัดเจนที่สุด?',opts:['BP 85/55 mmHg','ผู้ป่วยรู้สึกตัวดี','ผู้ป่วยนอนพัก','ผู้ป่วยมีญาติ'],a:0,why:'ความดันต่ำร่วมกับหน้ามืดหลังผ่าตัดอาจบ่งบอกการไหลเวียนเลือดไม่เพียงพอ ต้องรีบประเมินและรายงาน',written:'ช่วยให้ผู้ป่วยอยู่ในท่าปลอดภัย ไม่ให้ลุกเอง ประเมินสัญญาณชีพ ระดับความรู้สึกตัวและเลือดออก พร้อมรีบแจ้งทีมรักษา'}
+];
+
+const chapterNames={pain:'บทที่ 1: การประเมินและดูแลผู้ป่วยที่มีอาการปวด',fall:'บทที่ 2: การป้องกันการพลัดตกหกล้ม',infection:'บทที่ 3: การป้องกันและควบคุมการติดเชื้อ',vitals:'บทที่ 4: การประเมินการหายใจและสัญญาณชีพ'};
+let questions=[],index=0,score=0,answered=false,lastMode='all',writtenCount=0,writtenSaved=[];
+function showScreen(id){document.querySelectorAll('section').forEach(s=>s.classList.add('hidden'));document.getElementById(id).classList.remove('hidden');window.scrollTo({top:0,behavior:'smooth'});}
+function shuffle(arr){for(let i=arr.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];}return arr;}
+function startGame(mode){
+ lastMode=mode;let pool=mode==='all'?bank:bank.filter(x=>x.chapter===mode);
+ questions=shuffle(pool.map(q=>({...q,opts:q.opts.map((v,i)=>({v,correct:i===q.a})).sort(()=>Math.random()-.5)})).map(q=>({...q,a:q.opts.findIndex(o=>o.correct),opts:q.opts.map(o=>o.v)})));
+ // Shuffle answer choices while retaining the correct answer index
+ questions=shuffle(pool.map(q=>{let opts=shuffle(q.opts.map((v,i)=>({v,correct:i===q.a})));return {...q,opts:opts.map(o=>o.v),a:opts.findIndex(o=>o.correct)};}));
+ index=0;score=0;answered=false;writtenCount=0;writtenSaved=[];showScreen('game');renderQuestion();
+}
+function renderQuestion(){
+ const q=questions[index];answered=false;
+ document.getElementById('chapterBadge').textContent=chapterNames[q.chapter];
+ document.getElementById('counter').textContent=`ข้อ ${index+1} / ${questions.length}`;
+ document.getElementById('bar').style.width=`${index/questions.length*100}%`;
+ document.getElementById('caseTitle').textContent=q.title;
+ document.getElementById('scenario').textContent=q.scenario;
+ document.getElementById('question').textContent=`คำถาม: ${q.q}`;
+ const answers=document.getElementById('answers');answers.innerHTML='';
+ q.opts.forEach((opt,i)=>{const b=document.createElement('button');b.className='choice';b.textContent=String.fromCharCode(65+i)+'. '+opt;b.onclick=()=>{if(answered)return;answers.querySelectorAll('.choice').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');b.dataset.selected='true';};answers.appendChild(b);});
+ document.getElementById('feedback').className='feedback hidden';document.getElementById('feedback').textContent='';
+ document.getElementById('checkBtn').disabled=false;document.getElementById('checkBtn').classList.remove('hidden');
+ document.getElementById('nextBtn').classList.add('hidden');
+ document.getElementById('writtenArea').classList.add('hidden');document.getElementById('writtenAnswer').value='';
+ document.getElementById('writtenFeedback').classList.add('hidden');
+}
+function checkAnswer(){
+ if(answered)return;const selected=document.querySelector('#answers .choice.selected');if(!selected){alert('เลือกคำตอบก่อนนะ');return;}
+ const chosen=[...document.querySelectorAll('#answers .choice')].indexOf(selected),q=questions[index],ok=chosen===q.a;answered=true;if(ok)score++;
+ document.querySelectorAll('#answers .choice').forEach((b,i)=>{b.disabled=true;if(i===q.a)b.classList.add('correct');else if(i===chosen)b.classList.add('wrong');});
+ const f=document.getElementById('feedback');f.className='feedback '+(ok?'good':'bad');f.textContent=(ok?'✅ ตอบถูก! ':'❌ ยังไม่ถูก เฉลยคือ '+String.fromCharCode(65+q.a)+'. ')+q.opts[q.a]+' — '+q.why;
+ document.getElementById('checkBtn').classList.add('hidden');document.getElementById('writtenArea').classList.remove('hidden');
+ document.getElementById('nextBtn').classList.remove('hidden');document.getElementById('nextBtn').textContent=index===questions.length-1?'ดูผลคะแนน →':'ข้อต่อไป →';
+}
+function submitWritten(){
+ const val=document.getElementById('writtenAnswer').value.trim();if(!val){alert('พิมพ์คำตอบก่อนส่งนะ');return;}
+ const q=questions[index];writtenSaved.push({title:q.title,answer:val});writtenCount++;
+ const f=document.getElementById('writtenFeedback');f.className='feedback';f.innerHTML='<strong>แนวคำตอบตัวอย่าง:</strong><br>'+escapeHtml(q.written);f.classList.remove('hidden');
+ document.getElementById('writtenArea').querySelector('button').disabled=true;
+}
+function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function nextQuestion(){if(!answered)return;if(index<questions.length-1){index++;renderQuestion();window.scrollTo({top:0,behavior:'smooth'});}else{document.getElementById('scoreLine').textContent=`คะแนนข้อเลือกตอบ ${score} / ${questions.length} คะแนน`;document.getElementById('writtenSummary').textContent=`ส่งข้อเขียนแล้ว ${writtenCount} ข้อ • ข้อเขียนเป็นการฝึกอธิบายและไม่ได้ตรวจให้คะแนนอัตโนมัติ`;document.getElementById('bar').style.width='100%';showScreen('results');}}
+function confirmExit(){if(confirm('ต้องการกลับไปเลือกบทหรือไม่? ความคืบหน้ารอบนี้จะหายไป'))showScreen('categories');}
+</script>
+</body>
+</html>
